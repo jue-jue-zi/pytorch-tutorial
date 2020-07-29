@@ -117,8 +117,11 @@ if __name__ == "__main__":
     simplenet = SimpleNet()
     # 02. load exist model parameters
     if os.path.exists('./simplenet.pkl'):
+        print('Loading exist simplenet parameters...')
         simplenet_state_dict = torch.load('./simplenet.pkl')
         simplenet.load_state_dict(simplenet_state_dict)
+    else:
+        print('No exist simplenet parameters!')
     # 03. load Net and data to GPU if existed
     if torch.cuda.is_available():
         device = torch.device("cuda")

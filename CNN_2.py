@@ -54,8 +54,11 @@ class CNNNet(nn.Module):
 if __name__=="__main__":
     cnnnet = CNNNet()
     if os.path.exists('./cnnnet.pkl'):
+        print('Loading exist CNN parameters...')
         cnnnet_state_dict = torch.load('./cnnnet.pkl', map_location=torch.device('cpu'))
         cnnnet.load_state_dict(cnnnet_state_dict)
+    else:
+        print('No exist CNN parameters!')
     # GPU or CPU
     if torch.cuda.is_available():
         device = torch.device("cuda")

@@ -23,8 +23,11 @@ print(transfer_model)
 #%%
 if __name__=="__main__":
     if os.path.exists('./transfer_model.pkl'):
+        print('Loading exist transfer model parameters...')
         transfer_model_state_dict = torch.load('./transfer_model.pkl', map_location=torch.device('cpu'))
         transfer_model.load_state_dict(transfer_model_state_dict)
+    else:
+        print('No exist transfer model parameters!')
     # GPU or CPU
     if torch.cuda.is_available():
         device = torch.device("cuda")
