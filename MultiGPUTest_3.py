@@ -8,7 +8,7 @@ import torchvision.models as models
 import torch.optim as optim
 
 # assgin GPU
-os.environ["CUDA_VISIBLE_DEVICES"] = '1, 2, 3'  # 0 default for system display
+os.environ["CUDA_VISIBLE_DEVICES"] = '0, 1, 3'  # 2 is easy to overheating
 
 #%% creat a great GPU assuming Network (just for test in 1080Ti)
 class GreatNetwork(nn.Module):
@@ -57,7 +57,7 @@ class FakeDataset(Dataset):
 
     def __init__(self):
         super(FakeDataset, self).__init__()
-        self.count = 20000
+        self.count = 90000
 
     def __len__(self):
         return self.count
@@ -70,6 +70,7 @@ class FakeDataset(Dataset):
 #%% test one Batch images to multi GPUs for training
 # (one image to one GPU)
 def main():
+    print('-------------------RUN FOR TEST----------------------')
     if not (torch.cuda.is_available() or torch.cuda.device_count() > 1):
         return
     # assign GPUs for training devices
